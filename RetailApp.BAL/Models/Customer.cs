@@ -14,9 +14,9 @@ namespace RetailApp.BAL.Models
         /// <returns></returns>
         public int GetDiscount(User user)
         {
-            if (user.IsGrocery)
+            if (user.Product.Category == ProductCategory.Grocery)
             {
-                return Utilities.GetDiscountBasedOnAmount(user.BillAmount);
+                return Utilities.GetDiscountBasedOnAmount(user.Product.BillAmount);
             }
             else
             {
@@ -25,7 +25,7 @@ namespace RetailApp.BAL.Models
                     discount_rate = 0;
                 }
 
-                return Utilities.GetPercentageDiscount(user.BillAmount, discount_rate);
+                return Utilities.GetPercentageDiscount(user.Product.BillAmount, discount_rate);
             }
         }
     }

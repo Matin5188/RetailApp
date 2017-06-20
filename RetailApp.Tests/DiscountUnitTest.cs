@@ -12,9 +12,12 @@ namespace RetailApp.Tests
         public void Employee_Gets_30_Discount_Non_Groceries()
         {
             // Arrange
-            Employee emp = new Employee();            
-            emp.BillAmount = 60;
-            emp.IsGrocery = false;
+            Employee emp = new Employee();
+            Product prod = new Product();         
+            prod.BillAmount = 60;
+            prod.Category = ProductCategory.NonGrocery;
+
+            emp.Product = prod;
 
             // Act
             var netPayable = emp.GetDiscount(emp);
@@ -28,8 +31,11 @@ namespace RetailApp.Tests
         {
             // Arrange
             Employee emp = new Employee();
-            emp.BillAmount = 990;
-            emp.IsGrocery = true;
+            Product prod = new Product();
+            prod.BillAmount = 990;
+            prod.Category = ProductCategory.Grocery;
+
+            emp.Product = prod;
 
             // Act
             var netPayable = emp.GetDiscount(emp);
@@ -42,9 +48,13 @@ namespace RetailApp.Tests
         public void Affiliate_Gets_10_Discount_Non_Groceries()
         {
             // Arrange
-            Affiliate aff = new Affiliate();
-            aff.BillAmount = 60;
-            aff.IsGrocery = false;
+            Affiliate aff = new Affiliate();            
+
+            Product prod = new Product();
+            prod.BillAmount = 60;
+            prod.Category = ProductCategory.NonGrocery;
+
+            aff.Product = prod;
 
             // Act
             var netPayable = aff.GetDiscount(aff);
@@ -57,9 +67,13 @@ namespace RetailApp.Tests
         public void Affiliate_Gets_5_Discount_every_100_On_Groceries()
         {
             // Arrange
-            Affiliate aff = new Affiliate();
-            aff.BillAmount = 310;
-            aff.IsGrocery = true;
+            Affiliate aff = new Affiliate();            
+
+            Product prod = new Product();
+            prod.BillAmount = 310;
+            prod.Category = ProductCategory.Grocery;
+
+            aff.Product = prod;
 
             // Act
             var netPayable = aff.GetDiscount(aff);
@@ -72,10 +86,14 @@ namespace RetailApp.Tests
         public void Customer_Over_2_Years_Gets_5_Discount_Non_Groceries()
         {
             // Arrange
-            Customer cust = new Customer();
-            cust.BillAmount = 60; // expected 5% discount which is 3 and net payable = 57
-            cust.IsGrocery = false;
+            Customer cust = new Customer();            
             cust.CustomerSinceYear = 3;
+
+            Product prod = new Product();
+            prod.BillAmount = 60; // expected 5% discount which is 3 and net payable = 57
+            prod.Category = ProductCategory.NonGrocery;
+
+            cust.Product = prod;
 
             // Act
             var netPayable = cust.GetDiscount(cust);
@@ -88,10 +106,13 @@ namespace RetailApp.Tests
         public void Customer_Less_Than_2_Years_Gets_0_Discount_Non_Groceries()
         {
             // Arrange
-            Customer cust = new Customer();
-            cust.BillAmount = 60;
-            cust.IsGrocery = false;
+            Customer cust = new Customer();            
             cust.CustomerSinceYear = 1;
+
+            Product prod = new Product();
+            prod.BillAmount = 60;
+            prod.Category = ProductCategory.NonGrocery;
+            cust.Product = prod;
 
             // Act
             var netPayable = cust.GetDiscount(cust);
@@ -104,9 +125,12 @@ namespace RetailApp.Tests
         public void Customer_Gets_5_Discount_every_100_On_Groceries()
         {
             // Arrange
-            Customer cust = new Customer ();
-            cust.BillAmount = 310;
-            cust.IsGrocery = true;
+            Customer cust = new Customer ();            
+
+            Product prod = new Product();
+            prod.BillAmount = 310;
+            prod.Category = ProductCategory.Grocery;
+            cust.Product = prod;
 
             // Act
             var result = cust.GetDiscount(cust);

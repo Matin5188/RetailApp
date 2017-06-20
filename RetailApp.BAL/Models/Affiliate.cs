@@ -14,13 +14,13 @@ namespace RetailApp.BAL.Models
         /// <returns></returns>
         public int GetDiscount(User user)
         {
-            if (user.IsGrocery)
+            if (user.Product.Category == ProductCategory.Grocery)
             {
-                return Utilities.GetDiscountBasedOnAmount(user.BillAmount);
+                return Utilities.GetDiscountBasedOnAmount(user.Product.BillAmount);
             }
             else
             {
-                return Utilities.GetPercentageDiscount(user.BillAmount, DISCOUNT_RATE);
+                return Utilities.GetPercentageDiscount(user.Product.BillAmount, DISCOUNT_RATE);
             }
         }
     }
