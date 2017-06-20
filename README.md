@@ -5,7 +5,7 @@ Retail discount application which will provide net payable amount after discount
 - Affiliate
 - Customer
 # How Discount works
-Here there are mainly two types of discount 
+Here there are mainly two types of discount. Here assumption for demo application is user will have single product which is not the case in real time scenario.
 - Percentage based
   - This will be applicable for Non Grocery Items
     - discount will be applicable based on user (employee- 30%, affiliate - 10% and if customer over 2 years than 5 %)   
